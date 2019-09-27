@@ -34,6 +34,13 @@ function! shiny#gP(...) abort range
   call s:flash_and_paste('gP', a:lastline - a:firstline + 1)
 endfunction
 
+function! shiny#custom(command, ...) abort range
+  let s:count = a:lastline - a:firstline + 1
+  exec 'normal! ' . v:register . s:count . a:command
+  let patterns = s:generate_patterns(s:count)
+  call s:flash(patterns, s:vim_shiny_hi_paste)
+endfunction
+
 function! s:generate_matcher_for_visual(start_loc, end_loc) abort
   return [
           \printf('\%%%dl\%%%dv\_.*\%%%dl', a:start_loc[0], a:start_loc[1], a:start_loc[0]),
