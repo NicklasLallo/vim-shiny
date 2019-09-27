@@ -36,7 +36,7 @@ endfunction
 
 function! shiny#custom(command, ...) abort range
   let s:count = a:lastline - a:firstline + 1
-  exec 'normal' . v:register . s:count . a:command
+  exec 'normal "' . v:register . s:count . a:command
   let patterns = s:generate_patterns(s:count)
   call s:flash(patterns, s:vim_shiny_hi_paste)
 endfunction
