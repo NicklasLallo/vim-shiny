@@ -1,5 +1,19 @@
 # vim-shiny
 
+## Fork
+This fork allows shiny to take a custom function as an input to chain it together with other plugins.
+More specifically it adds this new function:
+```
+function! shiny#custom(command, ...) abort range
+  let s:count = a:lastline - a:firstline + 1
+  exec 'normal "' . v:register . s:count . a:command
+  let patterns = s:generate_patterns(s:count)
+  call s:flash(patterns, s:vim_shiny_hi_paste)
+endfunction
+```
+Which executes a command and then adds the shiny flash to it afterwards.
+
+## Shiny
 [![CircleCI](https://img.shields.io/circleci/project/github/MaxMEllon/vim-shiny/master.svg?style=flat-square&label=Circle%20CI)](https://circleci.com/gh/MaxMEllon/vim-shiny)
 [![Support Vim 8.0.0039 or above](https://img.shields.io/badge/support-Vim%208.0.0039%20or%20above-yellowgreen.svg?style=flat-square)](github.com/vim/vim/releases/tag/v8.0.0039)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.txt)
